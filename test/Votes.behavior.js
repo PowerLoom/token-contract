@@ -53,6 +53,7 @@ function shouldBehaveLikeVotes(accounts, tokens, { mode = 'blocknumber', fungibl
       });
 
       it('delegation with tokens', async function () {
+        await this.token.transfer(accounts[1], token, { from: accounts[0] });
         const weight = getWeight(token);
 
         expect(await this.votes.delegates(accounts[1])).to.be.equal(ZERO_ADDRESS);
@@ -65,7 +66,6 @@ function shouldBehaveLikeVotes(accounts, tokens, { mode = 'blocknumber', fungibl
           fromDelegate: ZERO_ADDRESS,
           toDelegate: accounts[1],
         });
-  
         expect(await this.votes.delegates(accounts[1])).to.be.equal(accounts[1]);
         expect(await this.votes.getVotes(accounts[1])).to.be.bignumber.equal(weight);
         expect(await this.votes.getPastVotes(accounts[1], timepoint - 1)).to.be.bignumber.equal('0');
@@ -75,6 +75,7 @@ function shouldBehaveLikeVotes(accounts, tokens, { mode = 'blocknumber', fungibl
 
       it('delegation update', async function () {
         await this.votes.delegate(accounts[1], { from: accounts[1] });
+        await this.token.transfer(accounts[1], token, { from: accounts[0] });
         const weight = getWeight(token);
 
         expect(await this.votes.delegates(accounts[1])).to.be.equal(accounts[1]);
@@ -118,6 +119,7 @@ function shouldBehaveLikeVotes(accounts, tokens, { mode = 'blocknumber', fungibl
         delegator.address = web3.utils.toChecksumAddress(delegator.getAddressString());
 
         it('accept signed delegation', async function () {
+          await this.token.transfer(delegator.address, token, { from: accounts[0] });
           const weight = getWeight(token);
 
           const { v, r, s } = await buildAndSignDelegation(
@@ -140,7 +142,6 @@ function shouldBehaveLikeVotes(accounts, tokens, { mode = 'blocknumber', fungibl
             fromDelegate: ZERO_ADDRESS,
             toDelegate: delegatee,
           });
-          
 
           expect(await this.votes.delegates(delegator.address)).to.be.equal(delegatee);
           expect(await this.votes.getVotes(delegator.address)).to.be.bignumber.equal('0');

@@ -110,6 +110,7 @@ contract('ERC20Votes', function (accounts) {
           });
 
           it('accept signed delegation', async function () {
+            await this.token.transfer(delegatorAddress, supply, { from: accounts[0] });
             const { v, r, s } = await buildData(this.token, {
               delegatee: delegatorAddress,
               nonce,

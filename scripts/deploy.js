@@ -7,11 +7,15 @@
 const hre = require("hardhat");
 
 async function main() {
-  const Token = await hre.ethers.getContractFactory("PowerloomToken");
-  const token = await Token.deploy();
+  // read the multisig address from env
+  const multisigAddr = process.env.MULTISIG_ADDR;
+  const token = await hre.ethers.deployContract("PowerloomToken", [multisigAddr]);
 
-  await token.deployed();
-  console.log("Token deployed to:", token.address);
+  await token.waitForDeployment();
+
+  console.log(
+    `Token deployed to ${token.target}`
+  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere

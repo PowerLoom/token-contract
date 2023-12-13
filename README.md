@@ -1,13 +1,8 @@
-# Sample Hardhat Project
+# Powerloom Token Contract Project
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
+Uses a standard Hardhat template and includes tests from OpenZeppelin's main [repository](https://github.com/OpenZeppelin/openzeppelin-contracts/tree/release-v5.0/test)
 
 ```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+npm install
+npm run test
 ```

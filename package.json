@@ -1,7 +1,7 @@
 {
-  "name": "Powerloom",
-  "description": "The decentralised data layer of web3",
-  "version": "5.0.1",
+  "name": "Powerloom Token Contract",
+  "description": "Hardhat project for Powerloom ERC20 Token Contract",
+  "version": "5.0.0",
   "private": true,
   "files": [
     "/contracts/*.sol",

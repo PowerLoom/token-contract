@@ -93,6 +93,6 @@
     "yargs": "^17.0.0"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "5.0.0"
+    "@openzeppelin/contracts": "5.0.2"
   }
 }
